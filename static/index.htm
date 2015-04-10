@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<script src="jquery.js"></script>
+    <script>
+        // url="http://127.0.0.1:8080/book";
+        url = "URL-LOAD-BALANCER:8080/book";
+
+        // POST
+
+        data = {
+                'bookname' : "See the Avengers go up against Ultron, Kang, the Masters of Evil and more over three decades of epic action. Fighting for the red, white and blue for over 60 years, Captain America is the living, breathing symbol of freedom and liberty. Featuring the work of Kurt Busiek, George Perez and other quintessential Avengers creators. The Avengers return.",
+                'authorname' : "Nikola Tesla",
+                'price': "123445566"
+              };
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: data,
+            dataType: 'json',
+            success: function(json) {
+                console.log(json);
+            },
+            error: function(json) {
+                console.log(json);
+            }
+        });
+
+        setTimeout(function () {
+            location.reload()
+        }, 3000);
+
+    </script>
+</head>
+<body>
+	
+</body>
+</html>
