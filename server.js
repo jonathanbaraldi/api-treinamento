@@ -30,6 +30,9 @@ app.use(function(req, res, next) {
 });
 
 
+////////////////////////////////////////////////////////////////////////
+
+
 // GET
 app.get('/',function(req,res){
 	var data = {
@@ -58,8 +61,36 @@ app.get('/book',function(req,res){
 			data["error"] = 0;
 			data["Books"] = rows;
 			data["Total"] = rows.length;
+
+
+			n1 = Math.floor((Math.random() * 100000) + 1);
+			n2 = Math.floor((Math.random() * 100000) + 1);
+			n3 = Math.floor((Math.random() * 100000) + 1);
+			nf = n1*n2/n3;
+			nf = nf*nf*nf*nf*nf;
+			nf = nf/n3/n2/n1;
+
+
+			var Pi=0;
+			var n=1;
+			for (i=0;i<=1000;i++) {
+				Pi=Pi+(4/n)
+				n=n+2
+				Pi=Pi-(4/n)
+				n=n+2
+			}
+
+			var retorno = Pi*Pi*nf*nf;
+
+			retorno = retorno*retorno*retorno*retorno;
+
+			retorno = retorno/retorno/retorno;
+			console.log(retorno);
+			data["Calculation"] = retorno;
+
 			res.json(data);
 			console.log(data);
+
 		}else{
 			data["Books"] = 'Nenhum livro encontrado';
 			res.json(data);
@@ -69,7 +100,6 @@ app.get('/book',function(req,res){
 });
 
 // ===================================
-
 
 
 // POST /book
