@@ -43,6 +43,53 @@ app.get('/',function(req,res){
 });
 
 
+app.get('/html',function(req,res){
+	
+	var data = {
+		"Data":""
+	};
+	
+	data["Data"] = "API de Serviços do Jon";
+	data["Ver"] = "0.2";
+
+	var body = '<html>'
+				+'	<head>'
+				+'	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>'
+				+'	</head>'
+				+'	<body>'
+				+'	    <form action="/upload" method="post">'
+				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
+				+'	        <input type="submit" value="Submit text"/>'
+				+'	    </form>'
+				+'	    <form action="/upload" method="post">'
+				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
+				+'	        <input type="submit" value="Submit text"/>'
+				+'	    </form>'
+				+'	    <form action="/upload" method="post">'
+				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
+				+'	        <input type="submit" value="Submit text"/>'
+				+'	    </form>'
+				+'	    <form action="/upload" method="post">'
+				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
+				+'	        <input type="submit" value="Submit text"/>'
+				+'	    </form>'
+				+'	    <form action="/upload" method="post">'
+				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
+				+'	        <input type="submit" value="Submit text"/>'
+				+'	    </form>'
+				+'	    <form action="/upload" method="post">'
+				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
+				+'	        <input type="submit" value="Submit text"/>'
+				+'	    </form>'
+				+'	</body>'
+				+'	</html>';
+
+	res.writeHead(200,{"Content-Type" : "text/html"});
+	res.write(body);
+	console.log(body);
+});
+
+
 
 // GET /book
 app.get('/book',function(req,res){
