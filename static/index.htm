@@ -4,38 +4,137 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script src="jquery.js"></script>
     <script>
         // url="http://127.0.0.1:8080/book";
-        url = "URL-LOAD-BALANCER:8080/book";
+
+        url = "http://192.168.25.38:8080/book"; // ELB URL
 
         // POST
+        function PostBook() {
+            
+            authorname = $('input.authorname').val();
+            bookname = $('input.bookname').val();
+            price = $('input.price').val();
 
-        data = {
-                'bookname' : "See the Avengers go up against Ultron, Kang, the Masters of Evil and more over three decades of epic action. Fighting for the red, white and blue for over 60 years, Captain America is the living, breathing symbol of freedom and liberty. Featuring the work of Kurt Busiek, George Perez and other quintessential Avengers creators. The Avengers return.",
-                'authorname' : "Nikola Tesla",
-                'price': "123445566"
-              };
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: data,
-            dataType: 'json',
-            success: function(json) {
-                console.log(json);
-            },
-            error: function(json) {
-                console.log(json);
-            }
+            data = {
+                'authorname' : authorname,
+                'bookname' : bookname,
+                'price': price
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                dataType: 'json',
+                success: function(json) {
+                    console.log(json);
+                },
+                error: function(json) {
+                    console.log(json);
+                }
+            });    
+        }
+        
+
+        function GetBook() {
+
+            $.ajax({
+                type: 'GET',
+                url: url,
+                dataType: 'json',
+                success: function(json) {
+                    console.log(json);
+                    Books = json.Books;
+                    
+                    total = "Total: "+json.Total;
+                    $('h3').text(total);
+
+                    $.each(Books, function(i, item){
+                        console.log(item.BookName);
+                        linha = "<tr>"
+                                    +"<td>"+item.AuthorName+"</td>"
+                                    +"<td>"+item.BookName+"</td>"
+                                    +"<td>"+item.Price+"</td>"
+                                +"</tr>";
+                        
+                        $('table tbody').append(linha);
+
+
+                    });
+                },
+                error: function(json) {
+                    console.log(json);
+                }
+            });
+    
+        }
+    
+        
+        $(document).ready(function(){
+            GetBook();
+            
+            $('button').click(function(){
+                PostBook();
+            });
         });
-
-        setTimeout(function () {
-            location.reload()
-        }, 3000);
-
     </script>
+    <style>
+        body {
+            text-align: center;
+            font-family: Tahoma;
+            font-size: 14px;
+        }
+        input {
+            margin: 5px;
+        }
+        table {
+            margin-top: 50px;
+            position: absolute;
+            width:800px;
+            border:1px solid gray;
+            left:50%;
+            margin-left: -400px;
+
+        }
+    </style>
+
 </head>
 <body>
-	
+
+
+	<label>Author</label>
+    <input type="text" class="authorname" />
+    <br/>
+
+    <label>BookName</label>
+    <input type="text" class="bookname" />
+    <br/>
+
+    <label>Price</label>
+    <input type="text" class="price" />
+    <br/>
+
+    <button>Enviar</button>
+
+    
+    <table>
+        <thead>
+            <tr>
+                <th>AuthorName</th>
+                <th>BookName</th>
+                <th>Price</th>
+            </tr>    
+        </thead>
+        <tbody>
+            <tr>
+            </tr>
+        </tbody>
+    </table>
+    <h3></h3>
+
+
 </body>
 </html>

@@ -1,24 +1,24 @@
 var express = require('express'); 
 var app = express();
 
-var http = require('http').Server(app);
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 
 // Configura conexão
 var connection = mysql.createConnection({
-		host     : 'db.connection',
-		user     : 'admin',
-		password : '1234567',
+		host     : '127.0.0.1',
+		user     : 'root',
+		password : '12qwaszx',
 		database : 'books',
 	});
 
 // Parsear o conteudo
+app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({
-  	extended: false
+  	extended: true
 }));
-app.use(bodyParser.json());
+
 
 // Configuração da requisição, cabeçalhos, etc. CORS
 app.use(function(req, res, next) {
@@ -30,94 +30,14 @@ app.use(function(req, res, next) {
 });
 
 
-// ===================================
-// ===================================
-// ===================================
-// ===================================
-// ===================================
-
-
 // GET
 app.get('/',function(req,res){
 	var data = {
 		"Data":""
 	};
-	data["Data"] = "Bem vindo a BookStore da Solid";
+	data["Data"] = "Welcome to Jon's API";
 	res.json(data);
-});
-
-
-// GET /jon
-app.get('/jon',function(req,res){
-	
-	var data = {
-		"Data":""
-	};
-	
-	data["Data"] = "API de Serviços do Jon";
-	data["Ver"] = "0.2";
-	
-	res.json(data);
-	/*
-	connection.query("SELECT * from book",function(err, rows, fields){
-		if(rows.length != 0){
-			data["error"] = 0;
-			data["Books"] = rows;
-			res.json(data);
-		}else{
-			data["Books"] = 'Nenhum livro encontrado';
-			res.json(data);
-		}
-	});
-	*/
-});
-
-// GET /jon
-app.get('/html',function(req,res){
-	
-	var data = {
-		"Data":""
-	};
-	
-	data["Data"] = "API de Serviços do Jon";
-	data["Ver"] = "0.2";
-
-	var body = '<html>'
-				+'	<head>'
-				+'	<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>'
-				+'	</head>'
-
-				+'	<body>'
-				+'	    <form action="/upload" method="post">'
-				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
-				+'	        <input type="submit" value="Submit text"/>'
-				+'	    </form>'
-				+'	    <form action="/upload" method="post">'
-				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
-				+'	        <input type="submit" value="Submit text"/>'
-				+'	    </form>'
-				+'	    <form action="/upload" method="post">'
-				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
-				+'	        <input type="submit" value="Submit text"/>'
-				+'	    </form>'
-				+'	    <form action="/upload" method="post">'
-				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
-				+'	        <input type="submit" value="Submit text"/>'
-				+'	    </form>'
-				+'	    <form action="/upload" method="post">'
-				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
-				+'	        <input type="submit" value="Submit text"/>'
-				+'	    </form>'
-				+'	    <form action="/upload" method="post">'
-				+'	        <textarea name="text" rows="20" cols="60"></textarea>'
-				+'	        <input type="submit" value="Submit text"/>'
-				+'	    </form>'
-				+'	</body>'
-				+'	</html>';
-
-	res.writeHead(200,{"Content-Type" : "text/html"});
-	res.write(body);
-	console.log("html");
+	console.log(data);
 });
 
 
@@ -127,7 +47,7 @@ app.get('/book',function(req,res){
 	var data = {
 		"error":1,
 		"Books":"",
-		"Number":""
+		"Total":""
 	};
 	
 	connection.query("SELECT * from book",function(err, rows, fields){
@@ -136,75 +56,33 @@ app.get('/book',function(req,res){
 
 		if(rows.length != 0){
 			data["error"] = 0;
-			
-			
 			data["Books"] = rows;
-			
-
-			n1 = Math.floor((Math.random() * 100000) + 1);
-			n2 = Math.floor((Math.random() * 100000) + 1);
-			n3 = Math.floor((Math.random() * 100000) + 1);
-			nf = n1*n2/n3;
-			nf = nf*nf*nf*nf*nf;
-			nf = nf/n3/n2/n1;
-
-
-			var Pi=0;
-			var n=1;
-			for (i=0;i<=1000;i++) {
-				Pi=Pi+(4/n)
-				n=n+2
-				Pi=Pi-(4/n)
-				n=n+2
-			}
-
-			retorno = Pi*Pi*nf*nf;
-
-			retorno = retorno*retorno*retorno*retorno;
-
-			retorno = retorno/retorno/retorno;
-
-			console.log(retorno);
-			data["Number"] = retorno;
-			
+			data["Total"] = rows.length;
 			res.json(data);
-
+			console.log(data);
 		}else{
 			data["Books"] = 'Nenhum livro encontrado';
 			res.json(data);
+			console.log(data);
 		}
 	});
 });
 
+// ===================================
 
-// ===================================
-// ===================================
-// ===================================
-// ===================================
-// ===================================
 
 
 // POST /book
 app.post('/book',function(req,res){
-	
-	console.log(req.body);
-	
-	/*
-	content += req;
-	RESPOSTA = JSON.parse(content);
-	console.log(RESPOSTA);
-	*/
 
 	var Bookname = req.body.bookname;
 	var Authorname = req.body.authorname;
 	var Price = req.body.price;
+
 	var data = {
 		"error":1,
 		"Books":""
 	};
-
-	// console.log(Bookname);
-
 
 	if(!!Bookname && !!Authorname && !!Price){
 		connection.query("INSERT INTO book (Bookname,Authorname,Price) VALUES(?,?,?)",[Bookname,Authorname,Price],function(err, rows, fields){
@@ -216,20 +94,16 @@ app.post('/book',function(req,res){
 				data["Books"] = "Livro adicionado com sucesso!";
 			}
 			res.json(data);
+			console.log(data);
 		});
 	}else{
 		data["Books"] = "Por favor, informe todos os dados : (bookname, authorname, price)";
 		res.json(data);
+		console.log(data);
 	}
 });
 
-
 // ===================================
-// ===================================
-// ===================================
-// ===================================
-// ===================================
-
 
 // PUT /book
 app.put('/book',function(req,res){
@@ -250,19 +124,16 @@ app.put('/book',function(req,res){
 				data["Books"] = "Livro atualizado com sucesso";
 			}
 			res.json(data);
+			console.log(data);
 		});
 	}else{
 		data["Books"] = "Por favor, informe todos os dados:  (id, bookname, authorname, price )";
 		res.json(data);
+		console.log(data);
 	}
 });
 
 // ===================================
-// ===================================
-// ===================================
-// ===================================
-// ===================================
-
 
 // DELETE /book
 app.delete('/book',function(req,res){
@@ -280,13 +151,15 @@ app.delete('/book',function(req,res){
 				data["Books"] = "Livro deletado com sucesso!";
 			}
 			res.json(data);
+			console.log(data);
 		});
 	}else{
 		data["Books"] = "Por favor, informe todos os dados: ( id )  ";
 		res.json(data);
+		console.log(data);
 	}
 });
 
-http.listen(8080,function(){
+app.listen(8080,function(){
 	console.log("Conectado e escutando na porta 8080");
 });
