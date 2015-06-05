@@ -89,7 +89,6 @@ app.get('/html',function(req,res){
 	res.writeHead(200,{"Content-Type" : "text/html"});
 	res.write(body);
 	res.end();
-	console.log("html");
 });
 
 
@@ -134,16 +133,14 @@ app.get('/book',function(req,res){
 			retorno = retorno*retorno*retorno*retorno;
 
 			retorno = retorno/retorno/retorno;
-			console.log(retorno);
+		
 			data["Calculation"] = retorno;
 
 			res.json(data);
-			console.log(data);
 
 		}else{
 			data["Books"] = 'Nenhum livro encontrado';
 			res.json(data);
-			console.log(data);
 		}
 	});
 });
@@ -173,12 +170,11 @@ app.post('/book',function(req,res){
 				data["Books"] = "Livro adicionado com sucesso!";
 			}
 			res.json(data);
-			console.log(data);
+			
 		});
 	}else{
 		data["Books"] = "Por favor, informe todos os dados : (bookname, authorname, price)";
 		res.json(data);
-		console.log(data);
 	}
 });
 
