@@ -9,7 +9,7 @@
     <script>
 
         // ELB-TreinamentoTest-318687531.us-west-2.elb.amazonaws.com 
-        url = "http://ELB-TreinamentoTest-318687531.us-west-2.elb.amazonaws.com:8080/book"; // ELB URL
+        url = "http://ELB-Test-1218787683.us-west-2.elb.amazonaws.com:8080/book"; // ELB URL
 
         // POST
         function PostBook() {
@@ -75,7 +75,13 @@
         
         $(document).ready(function(){
             GetBook();
-            
+
+            /*
+            setInterval(function(){
+                GetBook();
+            },1000);
+            */
+
             $('button').click(function(){
                 PostBook();
             });
