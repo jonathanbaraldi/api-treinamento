@@ -21,12 +21,12 @@ Os passos abaixo estarão sendo abordados no tutorial disponível em:
 Requisitos
 	*Criação de conta
 
-1) Criação da VPC
-3) Criação do banco de dados
-3) Configuração do ambiente
-4) Criação do ELB
-4) Criar AutoScalling Group e Launch Configuration
-5) Testar escalabilidade 
+	1) Criação da VPC
+	3) Criação do banco de dados
+	4) Configuração do ambiente
+	5) Criação do ELB
+	6) Criar AutoScalling Group e Launch Configuration
+	7) Testar escalabilidade 
 
 ========================================================
 BANCO DE DADOS  - CRIAÇÃO TABELA - RDS - MYSQL
@@ -59,7 +59,6 @@ AMBIENTE APP - EC2
 
 	git clone https://github.com/jonathanbaraldi/api-treinamento.git
 
-
 -------------------------------------------------------
 	# Testar se app está rodando
 	
@@ -67,12 +66,11 @@ AMBIENTE APP - EC2
 	node server.js
 
 
-
+============================
 User_Data
-==================================
-#!/bin/bash
-node /home/ec2-user/api-treinamento/server.js
-===================================
+
+	#!/bin/bash
+	node /home/ec2-user/api-treinamento/server.js
 
 
 @BaraldiJonathan
