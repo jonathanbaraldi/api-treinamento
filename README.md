@@ -16,23 +16,37 @@ Serviços abordados:
 - AutoScalling
 
 
-Os passos abaixo estarão sendo abordados no tutorial disponível em:
+Os passos abaixo estarão sendo abordados no tutorial disponível para ajudar a guiar no seu processo de construir uma aplicação escalável na nuvem da AWS.
 
 Requisitos
 	*Criação de conta
 
-	1) Criação da VPC
-	3) Criação do banco de dados
-	4) Configuração do ambiente
-	5) Criação do ELB
-	6) Criar AutoScalling Group e Launch Configuration
-	7) Testar escalabilidade 
+	1) Criação da VPC - Somente vídeo.
+	2) Configuração do ambiente - Abaixo.
+	3) Criação do banco de dados - Abaixo.
+	4) Criação do ELB - Somente vídeo.
+	5) Criar AutoScalling Group e Launch Configuration - Abaixo - UserData e vídeo.
+	6) Testar escalabilidade - Somente vídeo.
+
+===========================
+2 - AMBIENTE APP - EC2
+
+	Preparar o ambiente
+
+	yes | sudo yum update
+	yes | sudo yum install git
+	sudo yum install nodejs npm —-enablerepo=epel
+
+	sudo npm install -g vtop
+
+	git clone https://github.com/jonathanbaraldi/api-treinamento.git
 
 ========================================================
-BANCO DE DADOS  - CRIAÇÃO TABELA - RDS - MYSQL
+3 - BANCO DE DADOS  - CRIAÇÃO TABELA - RDS - MYSQL
 	
-	Conexão no banco direto da EC2 para criação das tabelas
-	Instalar o CLI do mysql no linux com 
+	Após terminar a configuração acima dentro da EC2, agora iremos fazer a conexão com o banco de dados e criar a tabela que iremos usar. Conexão no banco direto da EC2 para criação das tabelas
+	
+	# Instalar o CLI do mysql no linux com 
 
 	yes | sudo yum install mysql
 
@@ -46,18 +60,7 @@ BANCO DE DADOS  - CRIAÇÃO TABELA - RDS - MYSQL
 	# mysql>   INSERT INTO books.book VALUES (1,”My first autoscalling app”,”YourName","12");
 	#
 
-===========================
-AMBIENTE APP - EC2
-
-	Preparar o ambiente
-
-	yes | sudo yum update
-	yes | sudo yum install git
-	sudo yum install nodejs npm —-enablerepo=epel
-
-	sudo npm install -g vtop
-
-	git clone https://github.com/jonathanbaraldi/api-treinamento.git
+	mysql> exit
 
 -------------------------------------------------------
 	# Testar se app está rodando
@@ -67,10 +70,9 @@ AMBIENTE APP - EC2
 
 
 ============================
-User_Data
+User_Data - Criação do AutoScallingGroup
 
 	#!/bin/bash
 	node /home/ec2-user/api-treinamento/server.js
-
 
 @BaraldiJonathan
