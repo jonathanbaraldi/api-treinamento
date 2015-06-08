@@ -1,4 +1,4 @@
-# api-treinamento
+# api-treinamento - AWS AutoScalling
 
 API RESTful em NodeJS usada no treinamento Tropa de Elite AWS da Solid IT. 
 

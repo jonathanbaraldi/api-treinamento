@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 
 // Configura conexão
 var connection = mysql.createConnection({
-		host     : 'dbtreinamento.cmrvz5dpwsmq.us-west-2.rds.amazonaws.com',
+		host     : 'mydatabase.rds.amazonaws.com',
 		user     : 'admin',
 		password : '12qwaszx',
 		database : 'books',
@@ -90,7 +90,6 @@ app.get('/html',function(req,res){
 	res.write(body);
 	res.end();
 });
-
 
 
 // GET /book

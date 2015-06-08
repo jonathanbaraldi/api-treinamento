@@ -5,5 +5,5 @@ CREATE TABLE books.book ( id MEDIUMINT NOT NULL AUTO_INCREMENT, BookName VARCHAR
 
 SELECT * FROM books.book;
 
-INSERT INTO books.book VALUES (1,"My first autoscalling app","YourName","121221");
+INSERT INTO books.book VALUES (1,"My first autoscalling app","YourName","69");
 
