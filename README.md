@@ -70,7 +70,7 @@ Requisitos
 
 
 ============================
-User_Data - Criação do AutoScallingGroup
+User_Data - Criação do Auto Scaling Group
 
 	#!/bin/bash
 	node /home/ec2-user/api-treinamento/server.js
